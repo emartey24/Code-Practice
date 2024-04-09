@@ -1,0 +1,123 @@
+swagger: "2.0"
+info:
+  title: This is my SWAGGER
+  description: This is a todo list
+  version: 1.0
+  contact:
+    email: nicolaslozoya23@yahoo.com
+  servers:
+    -url: "http://localhost:3000/"
+    description: This is my local server
+
+schemes: [http, https]
+
+
+paths:
+ /todo:
+  post:
+   summary: Adds a todo to the list
+   description: Adds a todo to the list. If a list parameter is provided it add multiple todos in one call.
+   produces:
+    - application/json
+   consumes:
+    - application/json
+   parameters:
+   - in: body
+     name: body
+     description: Object containing the list of todos
+     required: true
+     schema:
+      type: object
+      properties:
+       list:
+        type: array
+        items:
+         $ref: '#/definitions/Todo'
+   responses: 
+      200:
+       description: Todo list posted
+      400:
+       description: Bad Request
+
+
+
+  get:
+      summary: Returns a todo list
+      description: Returns a list of all todos, if an id is provided, only a single todo is returned
+      parameters:
+      - name: id
+        in: query
+        description: ID of the todo
+        required: false 
+        type: integer
+      responses:
+       200:
+        description: Todo list retrieved
+       400: 
+        description: Bad request
+
+
+
+
+ /todo/{id}:
+  delete:
+   summary: deletes a todo
+   description: Deletes a todo from the list
+   parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the todo to delete
+      type: integer
+   responses:
+    200:
+      description: Todo deleted
+      # 400: description: Invalid ID
+  
+
+  put:
+    summary: Updates an existing todo and modifies its data
+    description: the id of task to be updated in the todolist
+    produces:
+      - application/json
+    consumes:
+      - application/json
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: the id of the task to be updated
+      type: integer
+    - in: body
+      name: body
+      required: true
+      schema:
+       type: object
+       properties:
+        todo:
+         type: string
+        completed:
+         type: boolean
+    responses:
+     200:
+      description: Todo updated
+     400:
+      description: Bad request
+
+
+
+
+ 
+    
+
+
+definitions:
+ Todo:
+  type: object
+  properties:
+   id:
+    type: integer
+   todo:
+    type: string
+   completed:
+    type: boolean

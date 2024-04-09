@@ -209,13 +209,65 @@ function diceGame() {
 
 diceGame();
 
-    
+
+// Let's search for the Braves in the array using a for loop'
+let teams = ["Braves","Reds","Yankees","Red Sox","Marlins"]; 
+
+// This lists all the teams in the array.
+console.log("All teams in order");
+for (let index = 0; index < teams.length; index++) {
+    console.log(teams[index]);
+}
+
+// Printout all odd numbers 
+console.log("\nAll odd index");
+for (let index = 0; index < teams.length; index++){
+    if (index % 2 != 0){
+        console.log(teams[index]);
+    }
+}
+
+// Print the array of teams in reverse
+console.log("\nArrays reversed")
+for (let index = teams.length - 1; index >= 0 ; index --) {
+    console.log(teams[index]);
+}
 
 
+// Part I: Print out every team that has an attendance over 30000.
+teams = [
+  {
+    name: "Braves",
+    city: "Atlanta",
+    state: "GA",
+    avgAttendance: 39401
+  },
+  {
+    name: "Reds",
+    city: "Cinicinatti",
+    state: "OH",
+    avgAttendance: 25164
+  },
+  {
+    name: "Yankees",
+    city: "New York City",
+    state: "NY",
+    avgAttendance: 40862
+  },
+  {
+    name: "Red Sox",
+    city: "Boston",
+    state: "MA",
+    avgAttendance: 32989
+  },
+]
 
-
-
-
+console.log("\nTeams with Attendance > 30,000")
+for ( let index = 0; index < teams.length; index++){
+    if(teams[index].avgAttendance>30000){
+    console.log(teams[index].name)
+}
+}  
 
 
 
