@@ -187,3 +187,4 @@
 {"body":{"list":[{"completed":true,"id":0,"todo":"string"}]},"endpoint":"/todo","ip":"::1","level":"info","method":"POST","path_parameters":{"0":"todo"},"query_parameters":{},"timestamp":"2024-04-08T22:37:09.697Z"}
 {"body":{},"endpoint":"/todo/2","ip":"::1","level":"info","method":"DELETE","path_parameters":{"0":"todo/2"},"query_parameters":{},"timestamp":"2024-04-08T22:37:32.331Z"}
 {"body":{},"endpoint":"/todo","ip":"::1","level":"info","method":"GET","path_parameters":{"0":"todo"},"query_parameters":{},"timestamp":"2024-04-08T22:37:47.645Z"}
+{"body":{"list":[{"todo":"play"},{"todo":"golf"},{"todo":"today"}]},"endpoint":"/todo","ip":"::1","level":"info","method":"POST","path_parameters":{"0":"todo"},"query_parameters":{},"timestamp":"2024-04-09T15:13:37.814Z"}
