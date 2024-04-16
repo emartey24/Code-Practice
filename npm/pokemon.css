@@ -1,0 +1,46 @@
+
+img {
+    display:flex;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.card {
+    color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: grid;
+    background-image: url("https://storage.ko-fi.com/cdn/useruploads/display/34cfaba3-b720-4599-9945-d026bad8a49f_widescreenthumbnail.png");
+    justify-content: center;
+    width: 40%;
+    height: 40%;
+    border: 18px solid yellow;
+    margin: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.pokemon {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

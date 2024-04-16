@@ -2,14 +2,15 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "Basic todolist for keeping track of things",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "seed": "psql -U postgres -d postgres -a -f /Users/corcoding/digitalcrafts/CodePractice/sql/pokemon.sql"
   },
   "author": "Emmanuel Martey",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "pg-promise": "^11.6.0",
     "swagger-ui": "^5.13.0",
