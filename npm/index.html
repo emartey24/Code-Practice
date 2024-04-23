@@ -1,16 +1,60 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokemania</title>
-    <link rel="stylesheet" href="pokemon.css">
-</head>
-<body>
-    <button id="generateBtn">Generate Pokémon</button>
-    <div id="pokedex">
-        <div id="pokemonContainer" class="pokemonContainer"></div>
-      </div>
-    <script src="index.js"></script>   
-</body>
+    ></script>
+    <link rel="stylesheet" href="pokemon.css" />
+  </head>
+  <body>
+    <img class= "Logo" src="./Images/Logo.png" alt="LOGO">
+    <!-- Background Image -->
+     <!-- Background Image -->
+     <div class = "bg">
+      <button id = "reset" onclick="window.location.reload();">Start over</button>
+      <!-- PLAYER 1 TO THE LEFT IN A BOX OR CARD -->
+      <div class ="pokemon">
+        <div id="playerOneContainer">
+          <div id = "playerOne">
+            <div id="playerOneImage"></div>
+            <div id="playerOneName"></div>
+            <div id="playerOneType"></div>
+            <div id="playerOneRegion"></div>
+            <div id="playerOneHp"></div>
+            <div id="playerOneDefense"></div>
+            <div id="playerOneAttack"></div>
+            <div id="playerOneWeakness"></div>
+            <div id="playerOneStrike"></div>
+          </div>
+          <div id="attackBoxContainer">
+            <button id="attack1">1</button>
+            <button id="attack2">2</button>
+            <button id="attack3">3</button>  
+            <button id="attack4">4</button>
+          </div>  
+        </div>
+
+        <img src="./Images/ball.png" id = "pokeball" onclick="battle()">
+        
+        
+<div id="playerTwoContainer">
+  <div id ="playerTwo">
+    <div id="playerTwoImage"></div>
+    <div id="playerTwoName"></div>
+    <div id="playerTwoType"></div>
+    <div id="playerTwoRegion"></div>
+    <div id="playerTwoHp"></div>
+    <div id="playerTwoDefense"></div>
+    <div id="playerTwoAttack"></div>
+    <div id="playerTwoWeakness"></div>
+  </div>
+  <div id="attackBoxContainer">
+    <button onclick="strikeOne()" id="strike1">1</button>
+    <button id="strike2">2</button>
+    <button id="strike3">3</button>  
+    <button id="strike4">4</button>
+  </div>  
+</div>  
+    <script src="index.js"></script>
+  </body>
 </html>

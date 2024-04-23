@@ -1,46 +1,55 @@
-
-img {
-    display:flex;
-    justify-content: center;
-    width: 200px;
-    height: 200px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 10px;
+body, html {
+  height: 100%;
+}
+.bg {
+  background-image: url("./Images/Stadium.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+.navbar-brand{
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  position: absolute !important;
+  left: 32%;
+  top: 250px !important;
+  bottom: 1px !important;
+  text-align: center !important;
+}
+#playerOne{
+margin-right: 10%;
+/* background-image: url("Poke Website Images/firebackground.png"); */
+font-weight: bold;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#playerTwo{
+/* background-image: url("Poke Website Images/icebackground.png"); */
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-weight: bold;
+}
+.pokemon{
+display: flex;
+z-index: 5;
+justify-content: space-around;
+position: absolute;
+bottom:20%;
+right: 45%;
+width: 40%;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-weight: bold;
 }
 
-.card {
-    color: aliceblue;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    display: grid;
-    background-image: url("https://storage.ko-fi.com/cdn/useruploads/display/34cfaba3-b720-4599-9945-d026bad8a49f_widescreenthumbnail.png");
-    justify-content: center;
-    width: 40%;
-    height: 40%;
-    border: 18px solid yellow;
-    margin: 10px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
+ #attackBoxContainer {
+  display: flex;
+  flex-direction: column;
+  background-color:coral;
 }
 
-.pokemon {
-    display: flex;
-    justify-content: center;
+.Logo{
+  display: flex;
+  justify-content: center;
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,7 +4,7 @@ const PORT = 3000;
 const pg = require("pg-promise")();
 const db = pg("postgres://postgres@localhost:5432/postgres");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 app.use(bodyParser.json()); // for parsing application/json
 
 const winston = require("winston");
@@ -96,6 +96,84 @@ app.get("/pokemon", async function (req, res) {
     }
   }
 });
+
+app.get("/pokemon/random", async function (req, res) {
+  // Store list of 6 random pokemon in the trainer variable
+   let trainer = await db.many('SELECT * from pokemon ORDER BY RANDOM() LIMIT 6');
+   // Add those 6 pokemon to our current party
+   for(let i = 0; i < trainer.length; i++){
+    await db.none('INSERT INTO trainer(name, type, hp, attack, defense) VALUES($1, $2, $3, $4, $5)', [trainer[i].name, trainer[i].type, trainer[i].hp, trainer[i].attack, trainer[i].defense]);
+   }
+
+   // Get four random moves for the pokemon
+   for(let i = 1; i <= trainer.length; i++){
+    let move = await db.any('SELECT strike.name, strike.power from trainer INNER JOIN strike ON trainer.type = strike.type WHERE trainer.id = $1 ORDER BY RANDOM() LIMIT 4', [i])
+    console.log
+    for(let j = 0; j < move.length; j++) {
+     move[j] = move[j].name
+    }
+    move = "{" + move.toString() + "}";
+    await db.any('UPDATE trainer SET strike = $1 WHERE trainer.id = $2',[move, i]);
+   }
+  
+   // Get four random moves for the pokemon
+   for(let i = 1; i <= trainer.length; i++){
+   let moves = await db.any('SELECT strike.name, strike.power from trainer INNER JOIN strike ON trainer.type = strike.type WHERE trainer.id = $1 ORDER BY RANDOM() LIMIT 4', [i])
+   console.log
+   for(let j = 0; j < moves.length; j++) {
+    moves[j] = moves[j].name
+   }
+   moves = "{" + moves.toString() + "}";
+   await db.any('SELECT * FROM opp');
+  }
+   // Store list of 6 random pokemon in the opp variable
+   let opp = await db.many('SELECT * from pokemon ORDER BY RANDOM() LIMIT 6');
+   // Add those 6 pokemon to our current party
+   for(let i = 0; i < opp.length; i++){
+    await db.none('INSERT INTO opp(name, type, hp, attack, defense) VALUES($1, $2, $3, $4, $5)', [opp[i].name, opp[i].type, opp[i].hp, opp[i].attack, opp[i].defense]);
+   }
+   // Get four random moves for the pokemon
+   for(let i = 1; i <= opp.length; i++){
+    let move = await db.any('SELECT strike.name, strike.power from opp INNER JOIN strike ON opp.type = strike.type WHERE opp.id = $1 ORDER BY RANDOM() LIMIT 4', [i])
+    console.log
+    for(let j = 0; j < move.length; j++) {
+     move[j] = move[j].name
+    }
+    move = "{" + move.toString() + "}";
+    await db.any('UPDATE opp SET strike = $1 WHERE opp.id = $2',[move, i]);
+   }
+  
+   // Get four random moves for the pokemon
+   for(let i = 1; i <= trainer.length; i++){
+   let moves = await db.any('SELECT strike.name, strike.power from trainer INNER JOIN strike ON trainer.type = strike.type WHERE trainer.id = $1 ORDER BY RANDOM() LIMIT 4', [i])
+   console.log
+   for(let j = 0; j < moves.length; j++) {
+    moves[j] = moves[j].name
+   }
+   moves = "{" + moves.toString() + "}";
+   await db.any('SELECT * FROM opp');
+  }
+  
+ });
+
+ app.get('/pokemon/Audio', async (req, res) => {
+  try {
+      const audioData = await db.many('SELECT name,img,music FROM stage');
+          if (!audioData || audioData.length === 0) {
+          return res.status(200).json({ error: 'No background audio data found' });
+      }
+       // Process each row with a for-loop
+      for (let i = 0; i < audioData.length; i++) {
+
+          console.log(audioData[i])
+      }
+      res.json(audioData);
+  } catch (error) {
+      console.error('Failed to get background audio data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 /*
 Endpoint: 
     DELETE: Deletes a pokemon
@@ -159,7 +237,8 @@ app.put("/pokemon/:id", async function (req, res) {
     return res.status(400).json({ msg: "no special char" });
   }
 
-  let { name, type, region, hp, attack, defense, weakness, img, strike} = req.body;
+  let { name, type, region, hp, attack, defense, weakness, img, strike } =
+    req.body;
   parseInt(hp);
   parseInt(attack);
   parseInt(defense);
@@ -172,7 +251,7 @@ app.put("/pokemon/:id", async function (req, res) {
     isNaN(defense) ||
     !weakness ||
     !img ||
-    !strike 
+    !strike
   ) {
     res.status(400).json({ msg: "Missing required fields" });
   }
@@ -219,7 +298,8 @@ app.post("/pokemon", async function (req, res) {
     clientError(req, "Body does not meet requirements", 400);
     return res.status(400).json({ msg: "Body Does not meet requirements" });
   }
-  let { name, type, region, hp, attack, defense, weakness, img, strike} = req.body;
+  let { name, type, region, hp, attack, defense, weakness, img, strike } =
+    req.body;
   parseInt(hp);
   parseInt(attack);
   parseInt(defense);
@@ -232,14 +312,14 @@ app.post("/pokemon", async function (req, res) {
     isNaN(defense) ||
     !weakness ||
     !img ||
-    !strike 
+    !strike
   ) {
     res.status(400).json({ msg: "Missing required fields" });
   }
   try {
     await db.none(
-      "INSERT INTO pokemon (name, type, region, hp, attack, defense, weakness, img, strike, special) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-      [name, type, region, hp, attack, defense, weakness, img, strike, special]
+      "INSERT INTO pokemon (name, type, region, hp, attack, defense, weakness, img, strike) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+      [name, type, region, hp, attack, defense, weakness, img, strike ]
     );
     if (Object.keys(req.body).length > 0) {
       res.status(200).json({ msg: "Pokemon added" });
@@ -255,5 +335,3 @@ app.post("/pokemon", async function (req, res) {
 app.listen(PORT, () => {
   console.log(`Running on Port ${PORT}`);
 });
-
-
